@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurDev | Infraestructura IT Premium</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1', boxShadow: '0 0 15px 0px rgba(6, 182, 212, 0.5)' },
+                            '50%': { opacity: '.5', boxShadow: '0 0 5px 0px rgba(6, 182, 212, 0.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+    <!-- 1. Cabecera (Header) -->
+    <header
+        class="fixed top-0 w-full z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-800 transition-all duration-300">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="server" class="text-slate-950 w-5 h-5"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tight">Sur<span class="text-cyan-400">Dev</span></span>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#servicios" class="hover:text-cyan-400 transition-colors">Servicios</a>
+                <a href="#nosotros" class="hover:text-cyan-400 transition-colors">Nosotros</a>
+                <a href="#testimonios" class="hover:text-cyan-400 transition-colors">Clientes</a>
+            </nav>
+
+            <a href="#contacto"
+                class="hidden md:inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-slate-950 bg-cyan-400 rounded-full hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(34,211,238,0.4)] hover:shadow-[0_0_25px_rgba(34,211,238,0.6)]">
+                Soporte Urgente
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-slate-300 hover:text-cyan-400">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden min-h-screen flex items-center">
+        <!-- Background Glow Effects -->
+        <div
+            class="absolute top-1/4 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] -z-10 pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] -z-10 pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Columna Izquierda: Texto y CTA -->
+                <div class="max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-cyan-400 mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                        </span>
+                        Sistemas Operativos al 99.99%
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+                        Arquitectura IT de <br />
+                        <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">Alta
+                            Disponibilidad</span>
+                    </h1>
+                    <p class="text-lg text-slate-400 mb-10 leading-relaxed max-w-xl">
+                        Optimizamos la infraestructura digital de tu empresa. Soporte técnico premium, redes seguras y
+                        soluciones de hardware para escalar sin interrupciones.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#contacto"
+                            class="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/25">
+                            Optimizar mi red <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#servicios"
+                            class="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-slate-300 bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-full hover:bg-slate-800 transition-colors duration-300">
+                            Ver servicios
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Arte IT Abstracto (Sin imágenes cuadradas) -->
+                <div class="relative h-[500px] w-full hidden lg:block perspective-1000">
+                    <!-- Contenedor principal flotante -->
+                    <div class="absolute inset-0 animate-float">
+                        <!-- Panel de Terminal Principal -->
+                        <div
+                            class="absolute top-8 right-4 w-[420px] max-w-full h-[280px] bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl shadow-cyan-900/30 overflow-hidden transform rotate-y-[-5deg] rotate-x-[5deg]">
+                            <!-- Header de Terminal -->
+                            <div class="h-10 bg-slate-950/50 border-b border-slate-800 flex items-center px-4 gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                <span class="ml-4 text-xs font-mono text-slate-500">root@surdev-server:~</span>
+                            </div>
+                            <!-- Cuerpo de Terminal -->
+                            <div class="p-5 font-mono text-sm">
+                                <div class="flex gap-2 mb-2 text-cyan-400">
+                                    <span>></span>
+                                    <span
+                                        class="typewriter-text overflow-hidden whitespace-nowrap border-r-2 border-cyan-400 inline-block">systemctl
+                                        status network-infrastructure</span>
+                                </div>
+                                <div class="text-slate-400 mb-1 animate-[fadeIn_0.5s_ease-in_1s_both]">● network.service
+                                    - Enterprise Routing</div>
+                                <div class="text-slate-400 mb-1 animate-[fadeIn_0.5s_ease-in_1.2s_both]"> Loaded: loaded
+                                    (/lib/systemd/system/net.service)</div>
+                                <div class="text-emerald-400 mb-1 animate-[fadeIn_0.5s_ease-in_1.4s_both]"> Active:
+                                    active (running) since Mon 2026-06-21</div>
+                                <div class="text-slate-400 mb-4 animate-[fadeIn_0.5s_ease-in_1.6s_both]"> Latency: 0.8ms
+                                    | Packet Loss: 0.00%</div>
+
+                                <!-- Simulación de carga -->
+                                <div
+                                    class="w-full bg-slate-800 rounded-full h-1.5 mt-6 animate-[fadeIn_0.5s_ease-in_2s_both]">
+                                    <div
+                                        class="bg-gradient-to-r from-cyan-400 to-blue-500 h-1.5 rounded-full w-[85%] relative">
+                                        <div
+                                            class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-[0_0_10px_#22d3ee] animate-pulse">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Flotante Pequeña: Uptime -->
+                        <div
+                            class="absolute top-[304px] right-[216px] w-56 bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-4 shadow-xl shadow-blue-900/20 transform translate-z-20 animate-float-delayed z-20">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shrink-0">
+                                    <i data-lucide="activity" class="text-blue-400 w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-[10px] text-slate-400 font-medium uppercase tracking-wider leading-tight mb-0.5">
+                                        Uptime Global</p>
+                                    <p class="text-xl font-bold text-white leading-none">99.999%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Flotante Pequeña: Seguridad -->
+                        <div
+                            class="absolute top-[304px] right-4 w-48 bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 rounded-xl p-4 shadow-xl shadow-cyan-900/30 transform translate-z-30 animate-pulse-glow z-10 flex items-center h-[88px]">
+                            <div class="flex items-center gap-3 w-full">
+                                <i data-lucide="shield-check" class="text-cyan-400 w-8 h-8 shrink-0"></i>
+                                <div>
+                                    <p class="text-sm font-semibold text-slate-200 leading-tight mb-0.5">Red Segura</p>
+                                    <p class="text-[10px] text-cyan-500 leading-none">Zero Trust Active</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Líneas de conexión abstractas (SVG) -->
+                        <svg class="absolute top-1/2 left-1/4 w-full h-full -z-10 text-slate-800/50"
+                            preserveAspectRatio="none" viewBox="0 0 100 100">
+                            <path d="M0,50 Q25,25 50,50 T100,50" fill="none" stroke="currentColor" stroke-width="0.5"
+                                stroke-dasharray="2 2" />
+                            <circle cx="50" cy="50" r="1" fill="#22d3ee" class="animate-ping" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Descripción / Sobre Nosotros -->
+    <section id="nosotros" class="py-24 bg-slate-950 relative border-t border-slate-900/50">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h2 class="text-cyan-400 font-semibold tracking-wide uppercase text-sm mb-3">La Misión SurDev</h2>
+            <p class="text-3xl md:text-5xl font-bold leading-tight text-slate-100 mb-8">
+                Diseñamos ecosistemas tecnológicos que <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200">nunca
+                    duermen.</span>
+            </p>
+            <p class="text-lg text-slate-400 leading-relaxed">
+                En SurDev entendemos que un segundo de inactividad es un segundo de pérdidas. Combinamos ingeniería de
+                software de vanguardia, hardware de alto rendimiento y arquitectura de redes resiliente para mantener el
+                motor de su empresa funcionando a su máxima capacidad, de forma segura e ininterrumpida.
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. Sección de Servicios -->
+    <section id="servicios" class="py-24 bg-slate-900/30 relative">
+        <div class="container mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Soluciones de Grado <span
+                        class="text-cyan-400">Corporativo</span></h2>
+                <p class="text-slate-400 max-w-2xl">Infraestructura escalable diseñada para entornos de alta demanda y
+                    tolerancia a fallos.</p>
+            </div>
+
+            <!-- Grid de Servicios (1 col móvil, 4 cols desktop) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Servicio 1 -->
+                <div
+                    class="group relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 group-hover:border-cyan-500/30 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all">
+                        <i data-lucide="headset"
+                            class="text-slate-300 group-hover:text-cyan-400 w-7 h-7 transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-3">Soporte IT Premium</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Asistencia técnica 24/7 de Nivel 3. Resolución
+                        proactiva de incidentes antes de que afecten la operatividad del negocio.</p>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div
+                    class="group relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-blue-500/50 transition-all duration-300 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 group-hover:border-blue-500/30 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all">
+                        <i data-lucide="network"
+                            class="text-slate-300 group-hover:text-blue-400 w-7 h-7 transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-3">Redes de Datos</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Despliegue de infraestructura de red SD-WAN,
+                        segmentación de VLANs y optimización de latencia para comunicaciones críticas.</p>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div
+                    class="group relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-indigo-500/50 transition-all duration-300 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 group-hover:border-indigo-500/30 group-hover:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all">
+                        <i data-lucide="code-2"
+                            class="text-slate-300 group-hover:text-indigo-400 w-7 h-7 transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-3">Ingeniería de Software</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Desarrollo de herramientas internas,
+                        automatización de scripts e integración de sistemas legados mediante APIs robustas.</p>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div
+                    class="group relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:-translate-y-2 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-14 h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 group-hover:border-emerald-500/30 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all">
+                        <i data-lucide="cpu"
+                            class="text-slate-300 group-hover:text-emerald-400 w-7 h-7 transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-3">Soluciones Hardware</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Aprovisionamiento y mantenimiento de servidores
+                        bare-metal, cabinas de almacenamiento SAN y estaciones de trabajo de alto rendimiento.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Testimonios / Reseñas (Bento Box minimalista) -->
+    <section id="testimonios" class="py-24 bg-slate-950">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Confiabilidad Comprobada</h2>
+                <p class="text-slate-400">Empresas que escalan su infraestructura con nosotros.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Testimonio 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                        </div>
+                        <p class="text-slate-300 mb-8 leading-relaxed">"La migración de nuestros servidores físicos a
+                            una arquitectura híbrida fue impecable. SurDev redujo nuestra latencia en un 40% y el equipo
+                            de soporte responde en minutos."</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-300 border border-slate-700">
+                            MR</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-100">Martín Robles</p>
+                            <p class="text-xs text-slate-500">CTO, FinTech Global</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div
+                    class="bg-slate-850 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                        </div>
+                        <p class="text-slate-300 mb-8 leading-relaxed">"Desde que delegamos nuestro IT a SurDev, los
+                            tiempos de caída (downtime) son un mito. Su monitoreo proactivo detectó y mitigó un ataque
+                            DDoS antes de que nos diéramos cuenta."</p>
+                    </div>
+                    <div class="flex items-center gap-4 relative z-10">
+                        <div
+                            class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-300 border border-slate-700">
+                            AS</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-100">Ana Silva</p>
+                            <p class="text-xs text-slate-500">Directora de Operaciones, Logística X</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-cyan-400 text-cyan-400"></i>
+                        </div>
+                        <p class="text-slate-300 mb-8 leading-relaxed">"La red SD-WAN que implementaron unificó nuestras
+                            12 sucursales con una estabilidad asombrosa. Profesionales de primer nivel, altamente
+                            recomendados para hardware corporativo."</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-300 border border-slate-700">
+                            JP</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-100">Javier Pérez</p>
+                            <p class="text-xs text-slate-500">CEO, Retail Group</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Formulario de Contacto -->
+    <section id="contacto" class="py-24 bg-slate-900/40 relative border-t border-slate-900">
+        <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent">
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl shadow-cyan-900/10">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold text-slate-100 mb-3">Inicie la Actualización</h2>
+                        <p class="text-slate-400">Complete el formulario y un ingeniero de soluciones se pondrá en
+                            contacto en menos de 15 minutos.</p>
+                    </div>
+
+                    <form action="#" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="nombre" class="text-sm font-medium text-slate-300">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" required
+                                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                                    placeholder="Ej. Juan Pérez">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="empresa" class="text-sm font-medium text-slate-300">Empresa</label>
+                                <input type="text" id="empresa" name="empresa"
+                                    class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                                    placeholder="Ej. Acme Corp">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="email" class="text-sm font-medium text-slate-300">Correo Electrónico
+                                Corporativo</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                                placeholder="juan@empresa.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="servicio" class="text-sm font-medium text-slate-300">Tipo de
+                                Requerimiento</label>
+                            <select id="servicio" name="servicio"
+                                class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all appearance-none cursor-pointer">
+                                <option value="soporte">Soporte IT / Incidentes</option>
+                                <option value="redes">Infraestructura de Red</option>
+                                <option value="software">Desarrollo de Software</option>
+                                <option value="hardware">Adquisición de Hardware</option>
+                                <option value="auditoria">Auditoría de Seguridad</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="mensaje" class="text-sm font-medium text-slate-300">Detalles del
+                                Proyecto</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required
+                                class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none"
+                                placeholder="Describa brevemente la topología de su problema o necesidad..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-4 px-6 text-slate-950 font-bold bg-cyan-400 hover:bg-cyan-300 rounded-xl transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] flex justify-center items-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i> Enviar Solicitud Segura
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Pie de Página (Footer) -->
+    <footer class="bg-slate-950 pt-16 pb-8 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div
+                            class="w-6 h-6 rounded bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                            <i data-lucide="server" class="text-slate-950 w-3 h-3"></i>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight">Sur<span class="text-cyan-400">Dev</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Liderando la transformación digital a nivel de infraestructura. Sistemas resilientes para
+                        empresas que operan al máximo nivel.
+                    </p>
+                    <!-- Redes Sociales -->
+                    <div class="flex items-center gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-100 font-semibold mb-4">Soluciones</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Infraestructura Cloud</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Seguridad de Redes</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Soporte Nivel 3</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Mantenimiento Preventivo</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-100 font-semibold mb-4">Compañía</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Casos de Éxito</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Carreras</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-slate-500">
+                    &copy; 2026 SurDev Enterprise Solutions. Todos los derechos reservados.
+                </p>
+                <div class="flex gap-6 text-xs text-slate-500">
+                    <a href="#" class="hover:text-slate-300">Privacidad</a>
+                    <a href="#" class="hover:text-slate-300">Términos</a>
+                    <a href="#" class="hover:text-slate-300">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inicializar Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

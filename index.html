@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio de Agentes IA - Proyecto Final</title>
+    <!-- Modern Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* CSS Variables & Theme Configuration */
+        :root {
+            --bg-color: #070a13;
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --cyan-glow: #00f3ff;
+            --violet-glow: #b700ff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Body & Background Grid */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            /* Digital Subtle Grid */
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            position: relative;
+        }
+
+        /* Ambient subtle glow behind the container */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.05) 0%, rgba(183, 0, 255, 0.05) 50%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Central Glassmorphism Container */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            padding: 4rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
+
+        /* Neon Tag */
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(0, 243, 255, 0.05);
+            color: var(--cyan-glow);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+            font-weight: 600;
+        }
+
+        /* Typography */
+        .student-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #a0a5b5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+        }
+
+        /* Buttons Grid */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Base Button Styles */
+        .btn {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-decoration: none;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        /* Gemini Button */
+        .btn-gemini {
+            border-color: rgba(0, 243, 255, 0.2);
+        }
+
+        .btn-gemini::before {
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .btn-gemini:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan-glow);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2), 0 0 15px rgba(0, 243, 255, 0.4) inset;
+        }
+
+        .btn-gemini:hover::before {
+            opacity: 1;
+        }
+
+        .btn-gemini:hover .btn-icon {
+            transform: scale(1.1);
+            color: var(--cyan-glow);
+            text-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* Claude Button */
+        .btn-claude {
+            border-color: rgba(183, 0, 255, 0.2);
+        }
+
+        .btn-claude::before {
+            background: radial-gradient(circle at center, rgba(183, 0, 255, 0.15) 0%, transparent 70%);
+        }
+
+        .btn-claude:hover {
+            transform: translateY(-10px);
+            border-color: var(--violet-glow);
+            box-shadow: 0 10px 30px rgba(183, 0, 255, 0.2), 0 0 15px rgba(183, 0, 255, 0.4) inset;
+        }
+
+        .btn-claude:hover::before {
+            opacity: 1;
+        }
+
+        .btn-claude:hover .btn-icon {
+            transform: scale(1.1);
+            color: var(--violet-glow);
+            text-shadow: 0 0 10px var(--violet-glow);
+        }
+
+        /* Docs Button */
+        .btn-docs {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-docs::before {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .btn-docs:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1), 0 0 15px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        .btn-docs:hover::before {
+            opacity: 1;
+        }
+
+        .btn-docs:hover .btn-icon {
+            transform: scale(1.1);
+            color: #fff;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* Terminal Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .terminal-modal {
+            width: 90%;
+            max-width: 800px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 243, 255, 0.1);
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+
+        .modal-overlay.active .terminal-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .terminal-header {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f56;
+        }
+
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+
+        .dot-green {
+            background: #27c93f;
+        }
+
+        .terminal-title {
+            color: #8b949e;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .terminal-close {
+            background: none;
+            border: none;
+            color: #8b949e;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+            margin-left: auto;
+        }
+
+        .terminal-close:hover {
+            color: #fff;
+        }
+
+        .terminal-body {
+            padding: 24px;
+            overflow-y: auto;
+            color: #c9d1d9;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .terminal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .terminal-prompt::before {
+            content: 'dev@sur-lab:~$ ';
+            color: #7ee787;
+        }
+
+        .terminal-command {
+            color: #79c0ff;
+        }
+
+        .terminal-output {
+            color: #a5d6ff;
+            margin-bottom: 1.5rem;
+            display: block;
+            white-space: pre-wrap;
+        }
+
+        .typewriter-text {
+            border-right: 2px solid #fff;
+            white-space: pre-wrap;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 2.5rem 1.5rem;
+                width: 95%;
+            }
+
+            .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Neon Tag & Info -->
+        <div class="tag">IFTS N.° 29 · DESARROLLO DE SISTEMAS WEB (FRONT END)</div>
+        <div class="student-info">Estudiante: Facundo David Bascur</div>
+
+        <!-- Main Titles -->
+        <h1>Laboratorio de Agentes IA</h1>
+        <h2>Trabajo Práctico Final de Prompt Engineering</h2>
+
+        <!-- Interactive Grid -->
+        <div class="buttons-grid">
+            <a href="./GEMINI_3.1pro/index.html" class="btn btn-gemini">
+                <div class="btn-icon">✨</div>
+                <span>Ver versión Gemini 3.1 Pro</span>
+            </a>
+
+            <a href="./CLAUDE_sonnet4.6/index.html" class="btn btn-claude">
+                <div class="btn-icon">🧠</div>
+                <span>Ver versión Claude Sonnet 4.6</span>
+            </a>
+
+            <button class="btn btn-docs" id="openDocsBtn">
+                <div class="btn-icon">💻</div>
+                <span>Ver Prompt & Documentación</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Elegant Terminal Modal -->
+    <div class="modal-overlay" id="docsModal">
+        <div class="terminal-modal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                </div>
+                <div class="terminal-title">bash - docs.sh</div>
+                <button class="terminal-close" id="closeDocsBtn">✖</button>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <p><span class="terminal-prompt"></span><span class="terminal-command">cat README.md</span></p>
+                <div class="terminal-output" id="readmeOutput">Cargando README.md...</div>
+                <p><span class="terminal-prompt"></span><span class="typewriter-text" id="typewriter">_</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactions Script -->
+    <script>
+        const modal = document.getElementById('docsModal');
+        const openBtn = document.getElementById('openDocsBtn');
+        const closeBtn = document.getElementById('closeDocsBtn');
+        const typewriter = document.getElementById('typewriter');
+        let typingTimeout;
+
+        // Open Modal
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+            typewriter.textContent = '';
+            clearTimeout(typingTimeout);
+            typeString("status: Documentation loaded successfully. System ready.", 0);
+
+            // Fetch README.md
+            const readmeOutput = document.getElementById('readmeOutput');
+            if (readmeOutput.textContent === 'Cargando README.md...') {
+                fetch('./README.md')
+                    .then(response => {
+                        if (!response.ok) throw new Error('No se pudo encontrar el archivo.');
+                        return response.text();
+                    })
+                    .then(text => {
+                        readmeOutput.textContent = text;
+                    })
+                    .catch(err => {
+                        readmeOutput.textContent = 'Error al cargar README.md: ' + err.message + '\n\nNOTA: Si estás abriendo el archivo index.html localmente (file://), las políticas de seguridad del navegador (CORS) bloquean la lectura de otros archivos locales por defecto. Esta función operará sin problemas al usar Live Server (VSCode) o al subirlo a Vercel.';
+                    });
+            }
+        });
+
+        // Close Modal via Button
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Close Modal via Overlay Click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Keyboard Escape to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Typewriter Effect
+        function typeString(str, i) {
+            if (i < str.length) {
+                typewriter.textContent += str.charAt(i);
+                typingTimeout = setTimeout(() => typeString(str, i + 1), 40);
+            }
+        }
+    </script>
+</body>
+
+</html>

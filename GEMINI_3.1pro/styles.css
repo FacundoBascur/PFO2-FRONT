@@ -1,0 +1,97 @@
+/* 
+  styles.css
+  Configuraciones personalizadas y animaciones complejas para SurDev
+  (Complementario a Tailwind CSS)
+*/
+
+/* --- Base --- */
+:root {
+    --color-neon-cyan: #22d3ee;
+    --color-neon-blue: #3b82f6;
+    --bg-deep: #020617;
+}
+
+body {
+    background-color: var(--bg-deep);
+    /* Textura sutil estilo ruido o malla para darle un look más 'hardware/tecnológico' */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* --- Personalización de la barra de desplazamiento (Scrollbar) --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* --- Utilidades y Efectos 3D --- */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+/* --- Animaciones de Componentes de Terminal --- */
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--color-neon-cyan)
+    }
+}
+
+.typewriter-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation:
+        typing 2s steps(40, end),
+        blink-caret .75s step-end infinite;
+}
+
+/* Animación de fundido encadenado para las líneas de la consola */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 
+   Nota: Las clases de animación como 'animate-float', 'animate-pulse-glow' 
+   se han definido en la configuración de Tailwind del index.html para un 
+   flujo de trabajo JIT perfecto, pero se podrían trasladar aquí si se desea.
+*/
