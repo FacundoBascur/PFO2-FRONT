@@ -11,7 +11,7 @@
 ## 🚀 Deploy Unificado
 Puedes ver el proyecto en vivo y navegar por las distintas versiones generadas por IA a través del siguiente enlace oficial en Vercel:
 
-🔗 
+🔗 https://vercel.com/facundodavidbascur-gmailcoms-projects/pfo2-front-bascur-facundo/3a5urhjKAqadcGourcLGgD21TYzA
 
 
 
